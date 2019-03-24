@@ -52,11 +52,11 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/signup" do
-    if params[:name] == "" || params[:password] == ""
-      # || params[:email] == ""
+    if params[:name] == "" || params[:password] == "" || params[:email] == ""
       flash[:error] = "You have missing required fields."
       redirect '/signup'
     else
+
       @teacher = Teacher.new(params)
       @teacher.save
       session[:teacher_id] = @teacher.id
@@ -144,12 +144,12 @@ class ApplicationController < Sinatra::Base
   end
 
 helpers do
-    def current_user
-      @current_user ||= Teacher.find(session[:teacher_id]) if session[:teacher_id]
+    def current_teacher
+      @current_teacher ||= Teacher.find(session[:teacher_id]) if session[:teacher_id]
     end
 
     def logged_in?
-      !!current_user
+      !!current_teacher
     end
   end
 end

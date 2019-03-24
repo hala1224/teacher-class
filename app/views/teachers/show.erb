@@ -3,7 +3,7 @@
    <% end %>
 
 
-<h1>Welcome, here are <%= @teacher.username %>'s Classes:</h1>
+<h1>Welcome, here are <%= @teacher.name %>'s Classes:</h1>
 
 <p><% @teacher.categories.each do |category| %>
     <a href="/categories/<%= category.id %>"><%= category.content %> </a><br>

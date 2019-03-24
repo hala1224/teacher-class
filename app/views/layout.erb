@@ -6,7 +6,7 @@
 <body>
 	<%= yield %>
 	<% if logged_in? %>
-		<h5>Logged in as <span class="loggedin"><%= current_user.username %></span> <span class="logout"><a href="/logout">(logout)</a></span></h5>
+		<h5>Logged in as <span class="loggedin"><%= current_teacher.name %></span> <span class="logout"><a href="/logout">(logout)</a></span></h5>
 	<% end %>
 </body>
 

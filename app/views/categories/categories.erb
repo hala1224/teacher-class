@@ -3,11 +3,11 @@
     <% end %>
 
 
-<h1>Welcome, <%= @teacher.username %>, here are all categories for this Gym:</h1>
+<h1>Welcome, <%= @teacher.name %>, here are all categories for this Gym:</h1>
 
 <h3>
   <p><% Category.all.each do |category| %>
-     <p><a href="/users/<%= category.teacher.slug %>"><%= category.teacher.username %> adding a class! <a href="/categories/<%= category.id %>">"<%= category.content %>"</p>
+     <p><a href="/teachers/<%= category.teacher.slug %>"><%= category.teacher.name %> adding a class! <a href="/categories/<%= category.id %>">"<%= category.content %>"</p>
     <% end %>
   </p> </h3>
 
