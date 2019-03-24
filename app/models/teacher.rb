@@ -3,10 +3,9 @@ class Teacher < ActiveRecord::Base
 
   has_many :categories
 
-  has_secure_password
 
 
-  def self.slug
+  def slug
     name.downcase.gsub(" ","-")
   end
 

@@ -7,8 +7,10 @@
   <br> These are classes for this Gym:</h1>
 
   <h3>
+
     <p><% Category.all.each do |category| %>
        <p>
+          <%= binding.pry %>
      <p><a href="/teachers/<%= category.teacher.slug %>"><%= category.teacher.name %> Offering a class <a href="/categories/<%= category.id %>">"<%= category.content %>"</p>
       <% end %>
     </p> </h3>
