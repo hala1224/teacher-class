@@ -3,14 +3,16 @@
     <% end %>
 
 
-<h1>Welcome, <%= @teacher.name %>, here are all categories for this Gym:</h1>
+<h1>Welcome, <%= @teacher.name %>
+  <br> These are classes for this Gym:</h1>
 
-<h3>
-  <p><% Category.all.each do |category| %>
-     <p><a href="/teachers/<%= category.teacher.slug %>"><%= category.teacher.name %> adding a class! <a href="/categories/<%= category.id %>">"<%= category.content %>"</p>
-    <% end %>
-  </p> </h3>
+  <h3>
+    <p><% Category.all.each do |category| %>
+       <p>
+     <p><a href="/teachers/<%= category.teacher.slug %>"><%= category.teacher.name %> Offering a class <a href="/categories/<%= category.id %>">"<%= category.content %>"</p>
+      <% end %>
+    </p> </h3>
 
       <br>
-      <p><a href="/categories/new">Create a New Category</a></p>
+      <p><a href="/categories/new">Create a New Class</a></p>
         <p><a href="/categories">Home</a></p>

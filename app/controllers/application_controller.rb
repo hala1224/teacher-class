@@ -84,7 +84,7 @@ class ApplicationController < Sinatra::Base
     @categories = @teacher.categories
     erb :"/teachers/show"
   end
-# replace user with teacher and tweets with classes
+
 
   get "/categories/new" do
     @teacher = current_teacher
@@ -142,6 +142,47 @@ class ApplicationController < Sinatra::Base
       redirect '/login'
     end
   end
+
+    patch "/categories/:id" do
+      if params[:content] == ""
+        flash[:notice] = "Please enter content to proceed"
+        redirect "/categories/#{params[:id]}/edit"
+      else
+        @category = Category.find(params[:id])
+        @category.update(content: params[:content])
+        redirect "/categories/#{@category.id}"
+      end
+    end
+
+    delete "/categories/:id/delete" do
+      @teacher = current_teacher
+      # binding.pry
+      puts "#{@teacher}"
+      @category = Category.find_by_id(params[:id])
+      if logged_in? && @category.teacher_id == session[:teacher_id]
+        @category.delete
+        erb :'/categories/delete'
+      elsif !logged_in? || @category.teacher_id != session[:teacher_id]
+        erb :'/categories/error'
+      else
+        erb :'/categories/error'
+      end
+    end
+
+
+    get "/logout" do
+      if logged_in?
+        session.clear
+        redirect '/login'
+      else
+        session.clear
+        redirect '/'
+      end
+    end
+
+
+
+
 
 helpers do
     def current_teacher

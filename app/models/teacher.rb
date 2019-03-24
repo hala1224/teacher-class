@@ -6,7 +6,7 @@ class Teacher < ActiveRecord::Base
   has_secure_password
 
 
-  def slug
+  def self.slug
     name.downcase.gsub(" ","-")
   end
 
