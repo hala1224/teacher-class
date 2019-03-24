@@ -1,0 +1,17 @@
+<% if flash.has?(:message) %>
+      <%= flash[:message] %>
+    <% end %>
+
+<h1><%=@category.teacher.username %> adding a category!</h1>
+    <h2> "<%= @category.content %>"</h2>
+      <br></br>
+
+<a href='/categories/<%= @category.id %>/edit'><h4>Edit Category</h4></a>
+<p>
+    <form action="/categories/<%=@category.id%>/delete" method="post">
+      <input type="hidden" id="hidden" name="_method" value="delete">
+      <input type='submit' id="delete" name="delete" value='Delete Category'>
+    </form>
+
+    <p><a href="/categories/new">Create a New Category</a></p>
+      <p><a href="/categories">Home</a></p>

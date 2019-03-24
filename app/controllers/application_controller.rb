@@ -66,6 +66,7 @@ class ApplicationController < Sinatra::Base
 
 
   post "/login" do
+    binding.pry
     @teacher = Teacher.find_by(:username => params[:username])
     if @teacher && @teacher.authenticate(params[:password])
       session[:teacher_id] = @teacher.id

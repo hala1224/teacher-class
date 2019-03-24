@@ -1,0 +1,18 @@
+<% if flash.has?(:message) %>
+      <%= flash[:message] %>
+    <% end %>
+
+
+<h1>Edit Your Category</h1>
+
+<form action='/categories/<%= @category.id %>' method='post'>
+  <input id='hidden' type='hidden' name='_method' value='patch'>
+
+  Content: <input type='text' id='content' name='content' value='<%= @category.content %>' required>
+  <br></br>
+
+  <input type='submit' id='submit' value='Edit Category'>
+</form>
+
+  <p><a href="/categories/new">Create a New Category</a></p>
+    <p><a href="/categories">Home</a></p>

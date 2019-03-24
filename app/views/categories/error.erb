@@ -1,0 +1,9 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+
+<h1>Hey! This isn't your category!</h1>
+
+<p><a href="/categories/new">Create a New Category</a></p>
+<p><a href="/categories">Home</a></p>
