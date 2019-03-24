@@ -1,0 +1,15 @@
+<% if flash.has?(:message) %>
+     <%= flash[:message] %>
+   <% end %>
+
+
+<h1>Welcome, here are <%= @teacher.username %>'s Classes:</h1>
+
+<p><% @teacher.categories.each do |category| %>
+    <a href="/categories/<%= category.id %>"><%= category.content %> </a><br>
+   <% end %> </p>
+
+     <br>
+
+     <p> <a href="/categories/new">Create a New Class</a></p>
+       <p><a href="/categories">Home</a></p>

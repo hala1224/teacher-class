@@ -1,0 +1,16 @@
+<% if flash.has?(:message) %>
+      <%= flash[:message] %>
+    <% end %>
+
+
+<h1>Create a new category:</h1>
+
+<form action="/new" method="POST">
+  <p><h2><label>Content:</label></h2>
+  <input type="hidden" name="user_id" value="<%=session[:user_id]%>">
+  <input type="text" name="content" id="content" required</p>
+  <br></br>
+   <input type="submit" id='submit' value="Category">
+</form>
+
+    <p><a href="/categories">Home</a></p>
