@@ -45,14 +45,15 @@ class ApplicationController < Sinatra::Base
   get "/signup" do
     if logged_in?
       flash[:notice] = "You're already logged in! Redirecting..."
-      redirect '/classess'
+      redirect '/categories'
     else
       erb :"/teachers/create_teacher"
     end
   end
 
   post "/signup" do
-    if params[:username] == "" || params[:password] == "" || params[:email] == ""
+    if params[:name] == "" || params[:password] == ""
+      # || params[:email] == ""
       flash[:error] = "You have missing required fields."
       redirect '/signup'
     else
@@ -66,11 +67,11 @@ class ApplicationController < Sinatra::Base
 
 
   post "/login" do
-    binding.pry
-    @teacher = Teacher.find_by(:username => params[:username])
+     # binding.pry
+    @teacher = Teacher.find_by(:name => params[:name])
     if @teacher && @teacher.authenticate(params[:password])
       session[:teacher_id] = @teacher.id
-      flash[:success] = "Welcome, #{@teacher.username}!"
+      flash[:success] = "Welcome, #{@teacher.name}!"
       redirect '/categories'
     else
       flash[:error] = "Login failed!"
@@ -80,7 +81,7 @@ class ApplicationController < Sinatra::Base
 
   get '/teachers/:slug' do
     @teacher = Teacher.find_by_slug(params[:slug])
-    @classes = @teacher.classes
+    @categories = @teacher.categories
     erb :"/teachers/show"
   end
 # replace user with teacher and tweets with classes
@@ -131,7 +132,7 @@ class ApplicationController < Sinatra::Base
   get "/categories/:id/edit" do
     if logged_in?
       @category = Category.find(params[:id])
-      if @category.user_id == session[:user_id]
+      if @category.teacher_id == session[:teacher_id]
         # binding.pry
       erb :"/categories/edit_category"
       else
@@ -144,7 +145,7 @@ class ApplicationController < Sinatra::Base
 
 helpers do
     def current_user
-      @current_user ||= User.find(session[:user_id]) if session[:user_id]
+      @current_user ||= Teacher.find(session[:teacher_id]) if session[:teacher_id]
     end
 
     def logged_in?
